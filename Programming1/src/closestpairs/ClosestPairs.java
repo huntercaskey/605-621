@@ -3,6 +3,7 @@ import java.lang.Math;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -61,12 +62,81 @@ public class ClosestPairs {
 		System.out.println("Point:    x = " + closestPair[1].x + " y= " + closestPair[1].y);
 		System.out.println("The distances between them is " + distance(closestPair[0],closestPair[1]));
 		
+		int m = 4;
+		Point[][] closestMPairs = closestMPairs(a, m);
+		System.out.println();
+		for(int i = 0; i < closestMPairs.length; i++) {
+			System.out.println("Pair #" + i + ":");
+			System.out.println("Point:    x = " + closestMPairs[i][0].x + " y= " + closestMPairs[i][0].y);
+			System.out.println("Point:    x = " + closestMPairs[i][1].x + " y= " + closestMPairs[i][1].y);
+		}
+		
 	}
 	
 	private static double distance(Point a, Point b){
 		double xComponent = Math.pow(b.x - a.x, 2);
 		double yComponent = Math.pow(b.y - a.y, 2);
 		return Math.sqrt(xComponent + yComponent);
+	}
+	
+	private static Point[][] closestMPairs(Point[] a, int m) {
+		if(m >= (a.length - 1)) return null;
+		
+		Point[] sortByX = new Point[a.length]; 
+		Point[] sortByY = new Point[a.length];
+		for (int i = 0;i < a.length;i++){
+			sortByX[i] = a[i];
+			sortByY[i] = a[i];
+		}
+		Arrays.sort(sortByX, Point.sortX);
+		Arrays.sort(sortByY, Point.sortY);
+		
+		ArrayList<Point[]> closestPairs = new ArrayList<>();
+		for(int i = 0; i < m; i++) {
+			
+			
+			if(closestPairs.size() > 0) {
+				ArrayList<Point[]> candidateSet = new ArrayList<>();
+				for(Point[] pair : closestPairs) {
+					for(Point p : pair) {
+						List<Point> sortByXList = new ArrayList<Point>(Arrays.asList(sortByX));
+						List<Point> sortByYList = new ArrayList<Point>(Arrays.asList(sortByY));
+						int pXIdx = sortByXList.indexOf(p);
+						int pYIdx = sortByYList.indexOf(p);
+						sortByXList.remove(pXIdx);
+						sortByYList.remove(pYIdx);
+						
+						Point[] xArr = new Point[sortByXList.size()];
+						Point[] yArr = new Point[sortByYList.size()];
+						xArr = sortByXList.toArray(xArr);
+						yArr = sortByYList.toArray(yArr);
+
+
+						
+ 						candidateSet.add(closest(xArr, yArr));
+
+					}
+				}
+				
+				Point[] min = null;
+				double minimum = Double.MAX_VALUE;
+				for(Point[] p : candidateSet) {
+					if(distance(p[0], p[1]) < minimum) {
+						min = p;
+						minimum = distance(p[0], p[1]);
+					}
+				}
+				closestPairs.add(min);
+				
+			}
+			else {
+				closestPairs.add(closest(sortByX, sortByY));
+			}	
+		}
+		
+		Point[][] returnArray = new Point[closestPairs.size()][];
+		returnArray = closestPairs.toArray(returnArray);
+		return returnArray;
 	}
 	
 	public static Point[] closestPair(Point[] a){
