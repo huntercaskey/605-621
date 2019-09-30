@@ -1,3 +1,4 @@
+package closestpairs;
 import java.util.Comparator;
 
 public class Point {
