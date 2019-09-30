@@ -13,7 +13,8 @@ public class TestTuringMachine {
 //		testMachine1();
 //		testMachine2();
 //		testMachine3();
-		testMachine4();
+		//testProblem2a();
+		testProblem2bi();
 
 	}
 
@@ -108,7 +109,7 @@ public class TestTuringMachine {
 		System.out.println( "Actual output is: '" + tape.getTapeContents(false) + "' and the final state is: " + finalState);
 	}
 	
-	public static void testMachine4() {
+	public static void testProblem2a() {
 		TuringMachine twoRightMostSymbolsAreZeroMachine = new TuringMachine();
 		ArrayList<String> log = new ArrayList<>();
 		twoRightMostSymbolsAreZeroMachine.addRules( new Rule[] {  
@@ -138,8 +139,80 @@ public class TestTuringMachine {
 		Tape tape = new Tape(inputString);
 		int finalState = twoRightMostSymbolsAreZeroMachine.run(tape, log);
 		
-		if(inputString.length <= 30) {
-			for(String msg : log) {
+		outputTestResults(log);
+		
+		System.out.println( "Final tape contents are: '" + tape.getTapeContents(false) + "' and the final state is: " + finalState);
+	}
+
+	public static void testProblem2bi() {
+		TuringMachine binaryAdderMachine = new TuringMachine();
+		ArrayList<String> logger = new ArrayList<>();
+		binaryAdderMachine.addRules( new Rule[] {  
+				// Rule format: currentState, currentContent, newState, newContent, direction
+				new Rule(0, 'b', 0, 'b', 1),
+				new Rule(0, '0', 1, '0', 1),
+				new Rule(0, '1', 1, '1', 1),
+				
+				new Rule(1, 'b', 2, 'b', 1),
+				new Rule(1, '0', 1, '0', 1),
+				new Rule(1, '1', 1, '1', 1),
+				new Rule(1, 'x', 1, 'x', 1),
+				new Rule(1, 'y', 1, 'y', 1),
+				
+				new Rule(2, 'b', 3, 'b', -1),
+				new Rule(2, '0', 2, '0', 1),
+				new Rule(2, '1', 2, '1', 1),
+				
+				new Rule(3, 'b', 9, 'b', -1),
+				new Rule(3, '0', 4, 'b', -1),
+				new Rule(3, '1', 6, 'b', -1),
+				
+				new Rule(4, 'b', 5, 'b', -1),
+				new Rule(4, '0', 4, '0', -1),
+				new Rule(4, '1', 4, '1', -1),
+				
+				new Rule(5, '0', 1, 'x', 1),
+				new Rule(5, '1', 1, 'y', 1),
+				new Rule(5, 'x', 5, 'x', -1),
+				new Rule(5, 'y', 5, 'y', -1),
+				new Rule(5, 'b', 1, 'x', 1),
+				
+				new Rule(6, 'b', 7, 'b', -1),
+				new Rule(6, '0', 6, '0', -1),
+				new Rule(6, '1', 6, '1', -1),
+				
+				new Rule(7, '0', 1, 'y', 1),
+				new Rule(7, '1', 8, 'x', -1),
+				new Rule(7, 'x', 7, 'x', -1),
+				new Rule(7, 'y', 7, 'y', -1),
+				new Rule(7, 'b', 1, 'y', 1),
+				
+				new Rule(8, 'b', 1, '1', 1),
+				new Rule(8, '0', 1, '1', 1),
+				new Rule(8, '1', 8, '0', -1),
+
+				new Rule(9, 'b', -1, 'b', 1),
+				new Rule(9, '0', -1, '0', 1),
+				new Rule(9, '1', -1, '1', 1),
+				new Rule(9, 'x', 9, '0', -1),
+				new Rule(9, 'y', 9, '1', -1)
+
+		});
+
+		char[] inputString = new String("101100101b101").toCharArray();
+		System.out.println("\nRunning machine #5. Final state should be: -1");
+		Tape tape = new Tape(inputString);
+		int finalState = binaryAdderMachine.run(tape, logger);
+		
+		outputTestResults(logger);
+		
+		System.out.println( "Final tape contents are: '" + tape.getTapeContents(false) + "' and the final state is: " + finalState);
+	}
+
+	
+	public static void outputTestResults(ArrayList<String> logger) {
+		if(logger.size() <= 30) {
+			for(String msg : logger) {
 				System.out.println(msg);
 			}
 		}
@@ -147,7 +220,7 @@ public class TestTuringMachine {
 			FileWriter writer;
 			try {
 				writer = new FileWriter("output.txt");
-				for(String msg : log) {
+				for(String msg : logger) {
 					writer.write(msg + System.lineSeparator());
 				}
 				writer.close();
@@ -156,9 +229,5 @@ public class TestTuringMachine {
 				System.out.println(e.getMessage());
 			}
 		}
-		
-		System.out.println( "Final tape contents are: '" + tape.getTapeContents(false) + "' and the final state is: " + finalState);
 	}
-
-
 }

@@ -70,9 +70,10 @@ public class TuringMachine {
 					break;
 				}
 			}
-			if (applicableRule == null)
-				throw new IllegalStateException("Cannot find an applicable rule; tape contents = " 
-						+ tape.getTapeContents(false));
+			if (applicableRule == null) {
+				throw new IllegalStateException("Cannot find an applicable rule; tape contents='" 
+						+ tape.getTapeContents(true) + "', state=" + currentState + ", currentContent='" + currentContent + "'");
+			}
 			
 			sb.append("Current Tape Contents: '" + tape.getTapeContents(true) + "' ");
 			sb.append("Current State: " + applicableRule.currentState + " ");
@@ -95,6 +96,8 @@ public class TuringMachine {
 			
 			// Add the record of this Turing machine operation to the log
 			log.add(sb.toString());
+			
+			System.out.println(log.get(log.size() -1)); //Debug
 
 		}
 		return currentState;
