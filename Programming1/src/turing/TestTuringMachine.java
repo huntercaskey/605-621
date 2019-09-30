@@ -1,5 +1,7 @@
 package turing;
 
+import java.util.ArrayList;
+import java.io.FileWriter;
 
 // A test program for the TuringMachine class.  It creates three machines
 // and runs them.  The output from the program indictes the expected behavior.
@@ -18,7 +20,7 @@ public class TestTuringMachine {
 	
 	public static void testMachine1() {
 		TuringMachine writeMachine = new TuringMachine();
-
+		ArrayList<String> log = new ArrayList<>();
 		writeMachine.addRules( new Rule[] {  // writes Hello on the tape then halts
 				new Rule(0,'b',1,'1',1),
 				new Rule(1,'b',2,'0',1),
@@ -29,12 +31,13 @@ public class TestTuringMachine {
 
 		System.out.println("Running machine #1.  Output should be:  10101");
 		Tape tape = new Tape();
-		int finalState = writeMachine.run(tape);
-		System.out.println( "Actual output is: '" + tape.getTapeContents() + "' and the final state is: " + finalState);
+		int finalState = writeMachine.run(tape, log);
+		System.out.println( "Actual output is: '" + tape.getTapeContents(false) + "' and the final state is: " + finalState);
 	}
 
 	public static void testMachine2() {
 		TuringMachine badMachine = new TuringMachine();
+		ArrayList<String> log = new ArrayList<>();
 		badMachine.addRules( new Rule[] {  // writes ERROR on the tape then fails
 				new Rule(0,'b',1,'R',-1),
 				new Rule(1,'b',2,'O',-1),
@@ -46,7 +49,7 @@ public class TestTuringMachine {
 		System.out.println("\nRunning machine #2.  Should throw an IllegalStateExcpetion.");
 		Tape tape = new Tape();
 		try {
-			badMachine.run(tape);
+			badMachine.run(tape, log);
 			System.out.println("No Error was thrown.");
 		}
 		catch (IllegalStateException e) {
@@ -66,6 +69,7 @@ public class TestTuringMachine {
 
 		TuringMachine copyMachine = new TuringMachine();  // copies a string of a's and b's;
 		                                                  // machine must start on leftmost char in the string		
+		ArrayList<String> log = new ArrayList<>();
 		copyMachine.addRules(new Rule[] {
 				new Rule(0,'0',1,'2',-1),  // rules for cop3ing 0n 0
 				new Rule(1,'0',1,'0',-1),
@@ -100,13 +104,13 @@ public class TestTuringMachine {
 		});
 		
 		System.out.println("\nRunning machine #3.  Output should be: " + input + " " + input);
-		int finalState = copyMachine.run(tape);
-		System.out.println( "Actual output is: '" + tape.getTapeContents() + "' and the final state is: " + finalState);
+		int finalState = copyMachine.run(tape, log);
+		System.out.println( "Actual output is: '" + tape.getTapeContents(false) + "' and the final state is: " + finalState);
 	}
 	
 	public static void testMachine4() {
 		TuringMachine twoRightMostSymbolsAreZeroMachine = new TuringMachine();
-
+		ArrayList<String> log = new ArrayList<>();
 		twoRightMostSymbolsAreZeroMachine.addRules( new Rule[] {  
 				//Rule(int currentState, char currentContent, int newState, char newContent, int direction)
 				
@@ -117,9 +121,9 @@ public class TestTuringMachine {
 				// State 1 rules
 				new Rule(1,'0',2,'b',-1),
 				new Rule(1,'1',3,'b',-1),
-				new Rule(1,'b',-2,'b',-1),
+				new Rule(1,'b',-2,'b',-1), // Informally designate -2 as the rejecting state
 				// State 2 rules
-				new Rule(2,'0',-1,'b',-1),
+				new Rule(2,'0',-1,'b',-1), // Infomally designate -1 as the accepting state
 				new Rule(2,'1',-2,'b',-1),
 				new Rule(2,'b',-2,'b',-1),
 				// State 3 rules
@@ -132,7 +136,29 @@ public class TestTuringMachine {
 		char[] inputString = new String("10100").toCharArray();
 		System.out.println("\nRunning machine #4.  Final state should be: -1");
 		Tape tape = new Tape(inputString);
-		int finalState = twoRightMostSymbolsAreZeroMachine.run(tape);
-		System.out.println( "Actual output is: '" + tape.getTapeContents() + "' and the final state is: " + finalState);
+		int finalState = twoRightMostSymbolsAreZeroMachine.run(tape, log);
+		
+		if(inputString.length <= 30) {
+			for(String msg : log) {
+				System.out.println(msg);
+			}
+		}
+		else {
+			FileWriter writer;
+			try {
+				writer = new FileWriter("output.txt");
+				for(String msg : log) {
+					writer.write(msg + System.lineSeparator());
+				}
+				writer.close();
+			}
+			catch(Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		System.out.println( "Final tape contents are: '" + tape.getTapeContents(false) + "' and the final state is: " + finalState);
 	}
+
+
 }

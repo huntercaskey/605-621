@@ -20,7 +20,7 @@ public class TestTape {
 			tape.setContent("Hello".charAt(i));
 			tape.moveRight();
 		}
-		System.out.println("Tape Contents:  " + tape.getTapeContents());
+		System.out.println("Tape Contents:  " + tape.getTapeContents(false));
 		tape.moveRight();
 		System.out.println("Final position at the " + tape.getContent());
 		
@@ -29,7 +29,7 @@ public class TestTape {
 		Tape tape2 = new Tape(inputString);
 		
 		
-		System.out.println("Tape Contents:  " + tape2.getTapeContents());   
+		System.out.println("Tape Contents:  " + tape2.getTapeContents(false));   
 	}
 
 }

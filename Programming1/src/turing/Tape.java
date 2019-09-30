@@ -34,7 +34,7 @@ public class Tape {
 		this.currentCell = this.currentCell.next;
 	}
 	
-	public String getTapeContents() {
+	public String getTapeContents(boolean showHead) {
 		Cell cellPointer = this.currentCell;
 		StringBuilder sb = new StringBuilder();
 		
@@ -43,10 +43,14 @@ public class Tape {
 			cellPointer = cellPointer.prev;
 		}
 		
-	
-		// Iterate until the end of the tape, recording the contents of the tape as wel go along.
-		while(cellPointer.next != null) {
-			sb.append(cellPointer.content);
+		// Iterate until the end of the tape, recording the contents of the tape
+		while(cellPointer != null) {
+			if(showHead && cellPointer == this.currentCell) {
+				sb.append("[" + cellPointer.content + "]");
+			}
+			else {
+				sb.append(cellPointer.content);
+			}
 			cellPointer = cellPointer.next;
 		}
 		

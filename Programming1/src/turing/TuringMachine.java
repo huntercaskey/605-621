@@ -52,14 +52,16 @@ public class TuringMachine {
 	 * tape when this method is called constitute the input to the machine's
 	 * computation.
 	 * @return the content of the tape at the end of the computation.  The return
-	 * value is obtained by calling {@link Tape#getTapeContents()}.
+	 * value is obtained by calling {@link Tape#getTapeContents(boolean)}.
 	 * @throws IllegalStateException if at any point during the computation,
 	 * no applicable rule can be found.  This is taken to indicate a bug in the
 	 * machine's program.
 	 */
-	public int run(Tape tape) throws IllegalStateException {
+	public int run(Tape tape, ArrayList<String> log) throws IllegalStateException {
 		int currentState = 0;
+		StringBuilder sb;
 		while (currentState >= 0) {
+			sb = new StringBuilder();
 			char currentContent = tape.getContent();
 			Rule applicableRule = null;
 			for (Rule rule : rules) {
@@ -70,14 +72,15 @@ public class TuringMachine {
 			}
 			if (applicableRule == null)
 				throw new IllegalStateException("Cannot find an applicable rule; tape contents = " 
-						+ tape.getTapeContents());
+						+ tape.getTapeContents(false));
 			
-//			System.out.println("\nCurrent Tape Contents: '" + tape.getTapeContents() + "'");
-//			System.out.println("CurrentState ; CurrentContent ; NewState ; NewContent ; MoveDirection");
-//			System.out.println(applicableRule.currentState + " ; '"+ applicableRule.currentContent 
-//					+ "' ; " +applicableRule.newState + " ; '" +applicableRule.newContent 
-//					+ "' ;" +applicableRule.moveDir);  // for testing.
-			
+			sb.append("Current Tape Contents: '" + tape.getTapeContents(true) + "' ");
+			sb.append("Current State: " + applicableRule.currentState + " ");
+			sb.append("Current Content: '" + applicableRule.currentContent + "' ");
+			sb.append("New State: " + applicableRule.newState + " ");
+			sb.append("New Content: '" + applicableRule.newContent + "' ");
+			sb.append("Move Direction: " + applicableRule.moveDir + " ");
+				
 			
 			currentState = applicableRule.newState;
 			tape.setContent(applicableRule.newContent);
@@ -88,6 +91,10 @@ public class TuringMachine {
 				tape.moveRight();
 			}
 			
+			sb.append("New Tape Contents: '" + tape.getTapeContents(true) + "' ");
+			
+			// Add the record of this Turing machine operation to the log
+			log.add(sb.toString());
 
 		}
 		return currentState;
