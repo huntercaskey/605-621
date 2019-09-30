@@ -18,7 +18,7 @@ public class Tape {
 		if(this.currentCell.prev == null) {
 			Cell newCurrentCell = new Cell();
 			newCurrentCell.next = this.currentCell;
-			newCurrentCell.content = ' ';
+			newCurrentCell.content = 'b';
 			this.currentCell.prev = newCurrentCell;
 		}
 		this.currentCell = this.currentCell.prev;
@@ -28,7 +28,7 @@ public class Tape {
 		if(this.currentCell.next == null) {
 			Cell newCurrentCell = new Cell();
 			newCurrentCell.prev = this.currentCell;
-			newCurrentCell.content = ' ';
+			newCurrentCell.content = 'b';
 			this.currentCell.next = newCurrentCell;
 		}
 		this.currentCell = this.currentCell.next;
@@ -55,14 +55,16 @@ public class Tape {
 	
 	public Tape() {
 		this.currentCell = new Cell();
-		this.currentCell.content = ' ';
+		this.currentCell.content = 'b';
 	}
 	
 	public Tape(char[] contents) {
 		this.currentCell = new Cell();
 		
+		Cell prevCell = new Cell();
+		prevCell.next = this.currentCell;
+		
 		Cell cellPointer = this.currentCell;
-		Cell prevCell = null;
 		for(char c : contents) {
 			cellPointer.prev = prevCell;
 			cellPointer.content = c;
@@ -70,6 +72,8 @@ public class Tape {
 			prevCell = cellPointer;
 			cellPointer = cellPointer.next;
 		}
-		cellPointer.prev = prevCell;		
+		
+		// Set the last blank cell to point to the previous
+		cellPointer.prev = prevCell;
 	}
 }
