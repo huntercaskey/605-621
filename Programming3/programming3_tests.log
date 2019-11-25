@@ -1,0 +1,21 @@
+String '1000110101' is an interleaving of x='101' and y='0'.
+The worst case number of comparisons required to execute the algorithm was: 95.
+
+String '101' is not an interleaving of x='101' and y='0'.
+The worst case number of comparisons required to execute the algorithm was: 818.
+
+String '0' is not an interleaving of x='101' and y='0'.
+The worst case number of comparisons required to execute the algorithm was: 90.
+
+String '100000000000000000000000000000000000000000000000000001' is an interleaving of x='101' and y='0'.
+The worst case number of comparisons required to execute the algorithm was: 491.
+
+String 'aaa1010101aaa' is an interleaving of x='101' and y='0'.
+The worst case number of comparisons required to execute the algorithm was: 1802.
+
+String 'aba1010101' is an interleaving of x='101' and y='0'.
+The worst case number of comparisons required to execute the algorithm was: 893.
+
+String '1010101aba' is an interleaving of x='101' and y='0'.
+The worst case number of comparisons required to execute the algorithm was: 968.
+
