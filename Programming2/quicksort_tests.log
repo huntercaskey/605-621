@@ -1,54 +1,54 @@
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Test #1~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Input array to both algorithms:          [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-Median of Three Quicksort Test #1, Execution #1 Time: 5364
-Textbook Quicksort Test #1, Execution #1 Time: 5363
-Median of Three Quicksort Test #1, Execution #2 Time: 1951
-Textbook Quicksort Test #1, Execution #2 Time: 3657
-Median of Three Quicksort Test #1, Execution #3 Time: 1706
-Textbook Quicksort Test #1, Execution #3 Time: 2194
-Median of Three Quicksort Test #1, Execution #4 Time: 1707
-Textbook Quicksort Test #1, Execution #4 Time: 4389
-Median of Three Quicksort Test #1, Execution #5 Time: 1706
-Textbook Quicksort Test #1, Execution #5 Time: 2194
+Textbook Quicksort Test #1, Execution #1 Time: 5608
+Median of Three Quicksort Test #1, Execution #1 Time: 5120
+Textbook Quicksort Test #1, Execution #2 Time: 1951
+Median of Three Quicksort Test #1, Execution #2 Time: 4145
+Textbook Quicksort Test #1, Execution #3 Time: 7314
+Median of Three Quicksort Test #1, Execution #3 Time: 6826
+Textbook Quicksort Test #1, Execution #4 Time: 2195
+Median of Three Quicksort Test #1, Execution #4 Time: 7802
+Textbook Quicksort Test #1, Execution #5 Time: 6827
+Median of Three Quicksort Test #1, Execution #5 Time: 2926
 
-Textbook Quicksort Average Time: 3559
-Median of Three Quicksort Average Time: 2486
-Array after quicksort_median_of_three:   [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+Textbook Quicksort Average Time: 4779
+Median of Three Quicksort Average Time: 5363
 Array after quicksort_textbook:          [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+Array after quicksort_median_of_three:   [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Test #2~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Input array to both algorithms:          [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+Textbook Quicksort Test #2, Execution #1 Time: 3657
 Median of Three Quicksort Test #2, Execution #1 Time: 2926
-Textbook Quicksort Test #2, Execution #1 Time: 2682
-Median of Three Quicksort Test #2, Execution #2 Time: 2926
-Textbook Quicksort Test #2, Execution #2 Time: 2681
-Median of Three Quicksort Test #2, Execution #3 Time: 3657
-Textbook Quicksort Test #2, Execution #3 Time: 2438
-Median of Three Quicksort Test #2, Execution #4 Time: 2194
-Textbook Quicksort Test #2, Execution #4 Time: 2194
-Median of Three Quicksort Test #2, Execution #5 Time: 1950
-Textbook Quicksort Test #2, Execution #5 Time: 1951
+Textbook Quicksort Test #2, Execution #2 Time: 3414
+Median of Three Quicksort Test #2, Execution #2 Time: 2682
+Textbook Quicksort Test #2, Execution #3 Time: 3901
+Median of Three Quicksort Test #2, Execution #3 Time: 2194
+Textbook Quicksort Test #2, Execution #4 Time: 2438
+Median of Three Quicksort Test #2, Execution #4 Time: 1950
+Textbook Quicksort Test #2, Execution #5 Time: 2194
+Median of Three Quicksort Test #2, Execution #5 Time: 1951
 
-Textbook Quicksort Average Time: 2389
-Median of Three Quicksort Average Time: 2730
-Array after quicksort_median_of_three:   [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+Textbook Quicksort Average Time: 3120
+Median of Three Quicksort Average Time: 2340
 Array after quicksort_textbook:          [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+Array after quicksort_median_of_three:   [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Test #3~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Input array to both algorithms:          [5, 9, 0, 4, 8, 3, 7, 2, 6, 1]
-Median of Three Quicksort Test #3, Execution #1 Time: 1950
 Textbook Quicksort Test #3, Execution #1 Time: 2438
-Median of Three Quicksort Test #3, Execution #2 Time: 1219
+Median of Three Quicksort Test #3, Execution #1 Time: 3170
 Textbook Quicksort Test #3, Execution #2 Time: 1463
-Median of Three Quicksort Test #3, Execution #3 Time: 975
-Textbook Quicksort Test #3, Execution #3 Time: 1707
-Median of Three Quicksort Test #3, Execution #4 Time: 975
-Textbook Quicksort Test #3, Execution #4 Time: 4633
-Median of Three Quicksort Test #3, Execution #5 Time: 1463
-Textbook Quicksort Test #3, Execution #5 Time: 4633
+Median of Three Quicksort Test #3, Execution #2 Time: 2438
+Textbook Quicksort Test #3, Execution #3 Time: 1463
+Median of Three Quicksort Test #3, Execution #3 Time: 2439
+Textbook Quicksort Test #3, Execution #4 Time: 1220
+Median of Three Quicksort Test #3, Execution #4 Time: 2438
+Textbook Quicksort Test #3, Execution #5 Time: 1707
+Median of Three Quicksort Test #3, Execution #5 Time: 3657
 
-Textbook Quicksort Average Time: 2974
-Median of Three Quicksort Average Time: 1316
-Array after quicksort_median_of_three:   [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+Textbook Quicksort Average Time: 1658
+Median of Three Quicksort Average Time: 2828
 Array after quicksort_textbook:          [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+Array after quicksort_median_of_three:   [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
